@@ -19,13 +19,10 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Music Overlay */
+/* 🔊 Music Overlay */
 #musicOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.9);
     display: flex;
     justify-content: center;
@@ -35,21 +32,23 @@ body {
 }
 
 .overlay-text {
-    color: #ff4d6d;
-    font-size: 32px;
+    color: #ff5f8f;
+    font-size: clamp(26px, 6vw, 36px);
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.7; }
+    0% { transform: scale(1); opacity: .7; }
     50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1); opacity: .7; }
 }
 
-/* Main Content */
+/* 🌹 Main Content */
 .container {
     text-align: center;
-    animation: fadeIn 3s ease;
+    animation: fadeIn 2.5s ease;
+    position: relative;
+    top: -30px;
 }
 
 @keyframes fadeIn {
@@ -57,42 +56,47 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
+/* 🌹 BIGGER ROSE */
 .rose {
-    font-size: 120px;
-    filter: drop-shadow(0 0 20px crimson);
-    animation: bloom 4s ease-in-out infinite alternate;
+    font-size: clamp(150px, 38vw, 220px);
+    filter: drop-shadow(0 0 25px crimson);
+    animation: bloom 3s ease-in-out infinite;
 }
 
 @keyframes bloom {
-    from { transform: scale(0.9); }
-    to { transform: scale(1.1); }
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(0.95); }
 }
 
+/* ✍️ BIGGER TEXT */
 #typing {
-    margin-top: 30px;
-    font-size: 42px;
+    margin-top: 20px;
+    font-size: clamp(36px, 9vw, 60px);
     font-family: 'Great Vibes', cursive;
-    color: #ff4d6d;
-    text-shadow: 0 0 15px #ff4d6d;
-    min-height: 60px;
+    color: #ff5f8f;
+    text-shadow: 0 0 18px #ff5f8f;
+    line-height: 1.25;
+    min-height: 70px;
 }
 
 .sub {
-    margin-top: 15px;
-    font-size: 18px;
-    opacity: 0.8;
+    margin-top: 10px;
+    font-size: clamp(16px, 4vw, 22px);
+    opacity: 0.85;
 }
 
-/* Floating Hearts */
+/* 💖 Floating Hearts */
 .heart {
     position: absolute;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    color: #ff4d6d;
+    font-size: 24px;
+    color: #ff5f8f;
+    filter: drop-shadow(0 0 8px #ff5f8f);
+    animation: floatUp linear infinite;
 }
 
 @keyframes floatUp {
-    from { transform: translateY(100vh); opacity: 1; }
+    from { transform: translateY(110vh); opacity: 1; }
     to { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
@@ -100,17 +104,17 @@ body {
 
 <body>
 
-<!-- 🎵 Music -->
+<!-- 🎵 Background Music -->
 <audio id="bgMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Tap to Play Overlay -->
+<!-- Tap to Play -->
 <div id="musicOverlay">
     <div class="overlay-text">Tap to Play 💖🎶</div>
 </div>
 
-<!-- Main Content -->
+<!-- Content -->
 <div class="container">
     <div class="rose">🌹</div>
     <div id="typing"></div>
@@ -118,32 +122,31 @@ body {
 </div>
 
 <script>
-// Typing Effect
+// ✍️ Typing Effect
 const text = "Happy Rose Day Amit ❤️ Love you baby";
-let index = 0;
+let i = 0;
 
 function typeText() {
-    if (index < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeText, 120);
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 110);
     }
 }
 typeText();
 
-// Floating Hearts
+// 💖 Floating Hearts
 setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
     document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 9000);
+}, 600);
 
-    setTimeout(() => heart.remove(), 7000);
-}, 500);
-
-// Music Play Fix
+// 🎵 Music Play Fix
 const overlay = document.getElementById("musicOverlay");
 const music = document.getElementById("bgMusic");
 
