@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Amit ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #2b002b, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    text-align: center;
+    animation: fadeIn 3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.rose {
+    font-size: 120px;
+    filter: drop-shadow(0 0 20px crimson);
+    animation: bloom 4s ease-in-out infinite alternate;
+}
+
+@keyframes bloom {
+    from { transform: scale(0.9); }
+    to { transform: scale(1.1); }
+}
+
+#typing {
+    margin-top: 30px;
+    font-size: 42px;
+    font-family: 'Great Vibes', cursive;
+    color: #ff4d6d;
+    text-shadow: 0 0 15px #ff4d6d;
+    min-height: 60px;
+}
+
+.sub {
+    margin-top: 15px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    color: #ff4d6d;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Music -->
+<audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div class="rose">🌹</div>
+    <div id="typing"></div>
+    <div class="sub">— just for you</div>
+</div>
+
+<script>
+const text = "Happy Rose Day Amit ❤️ Love you baby";
+let index = 0;
+
+function typeText() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeText, 120);
+    }
+}
+typeText();
+
+// floating hearts
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+}, 500);
+</script>
+
+</body>
+</html>
